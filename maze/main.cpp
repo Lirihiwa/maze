@@ -38,7 +38,7 @@ int main() {
 			}
 		}
 		window.clear();
-		mp.renderMap(window, map);
+		mp.renderMap(window);
 		window.display();
 	}
 
