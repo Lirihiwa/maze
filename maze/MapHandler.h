@@ -2,18 +2,23 @@
 
 #include <SFML/Graphics.hpp>
 
+using namespace sf;
+using namespace std;
+
 class MapHandler
 {
 	public:
-	int renderMap(sf::RenderWindow& window) {
-		const sf::Color BLOCK_COLOR = sf::Color::Green;
-		const sf::Vector2i BLOCK_SIZE = sf::Vector2i(50, 50);
+	int renderMap(RenderWindow& window) {
+		const Color BLOCK_COLOR = Color::Green;
+		const Vector2i BLOCK_SIZE = Vector2i(50, 50);
 		const int BLOCK_SIDE_SIZE = 50;
-		int map[20][20] = *generateMap();
+		vector<vector<int>> map(20, vector<int>(20));
+
+		map = generateMap();
 
 		for (int x = 0; x < 20; x++) {
 			for (int y = 0; y < 20; y++) {
-				sf::RectangleShape block = sf::RectangleShape(sf::Vector2f(BLOCK_SIZE));
+				RectangleShape block = RectangleShape(Vector2f(BLOCK_SIZE));
 				
 				if (map[x][y] == 1) {
 					block.setPosition(BLOCK_SIDE_SIZE * y, BLOCK_SIDE_SIZE * x);
@@ -28,8 +33,8 @@ class MapHandler
 	}
 
 private: 
-	std::vector<int[20][20]> generateMap() {
-		int map[20][20];
+	vector<vector<int>> generateMap() {
+		vector<vector<int>> map(20, vector<int>(20));
 
 		for (int x = 0; x < 20; x++) {
 			for (int y = 0; y < 20; y++) {
@@ -41,7 +46,7 @@ private:
 				}
 			}
 		}
-		return { map };
+		return map;
 	}
 };
 
