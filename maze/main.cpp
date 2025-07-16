@@ -3,7 +3,7 @@
 using namespace sf;
 
 int main() {
-	Window window(VideoMode(800, 600), "My window");
+	Window window(VideoMode(800, 600), "Maze");
 
 	while (window.isOpen()) {
 		Event event;
