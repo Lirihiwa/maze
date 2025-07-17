@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <ctime>
+#include <cstdlib>
 
 using namespace sf;
 using namespace std;
@@ -14,7 +16,7 @@ class MapHandler
 		const int BLOCK_SIDE_SIZE = 50;
 		vector<vector<int>> map(20, vector<int>(20));
 
-		map = generateMap();
+		map = generateMap(Vector2i(8, 10));
 
 		for (int x = 0; x < 20; x++) {
 			for (int y = 0; y < 20; y++) {
@@ -32,21 +34,28 @@ class MapHandler
 		return 0;
 	}
 
-private: 
-	vector<vector<int>> generateMap() {
+private:
+	vector<vector<int>> generateMap(Vector2i startPos) {
 		vector<vector<int>> map(20, vector<int>(20));
 
-		for (int x = 0; x < 20; x++) {
-			for (int y = 0; y < 20; y++) {
-				if (x == 0 || x == 19 || y == 0 || y == 19) {
-					map[x][y] = 1;
-				}
-				else {
-					map[x][y] = 0;
-				}
-			}
-		}
+		map[startPos.x][startPos.y] = 1;
+
+		Vector2i direction = chooseDirection();
+
 		return map;
+	}
+
+	Vector2i chooseDirection() {
+		srand(time(0));
+
+		vector<Vector2i> directions = {
+			Vector2i(0, 1),
+			Vector2i(0, -1),
+			Vector2i(1, 0),
+			Vector2i(-1, 0),
+		};
+
+		return directions[rand() % 4];
 	}
 };
 
